@@ -1,17 +1,22 @@
-function Question({ question,dispatch,answer }) {
-  console.log(question);
+import { useQuizContext } from "../context/QuizContext";
+
+function Question() {
+  const {questions,index} = useQuizContext()
+  const question = questions[index]
   
   return (
     <div>
       <h4>{question?.question}</h4>
-      <Options question={question}  dispatch={dispatch} answer={answer} />
+      <Options question={question} />
     </div>
   );
 }
 
-function Options({ question,dispatch,answer  }) {
-   const hasAnswered = answer !== null
+function Options({question}) {
+  const {dispatch,answer} = useQuizContext()
+  const hasAnswered = answer !== null
   return (
+    //each option button
     <div className="options">
       {question.options.map((opt,i) => {
         return (
